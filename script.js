@@ -12,17 +12,18 @@ const rulesModal = document.getElementById('rules-modal');
 const closeModalBtn = document.getElementById('close-modal');
 
 let score = 0;
+let latestResult = null;
 
 buttons.forEach(button => {
-    button.addEventListener('click', () => {
-      const playerChoice = button.dataset.choice;
-      const computerChoice = getComputerChoice();
-      const result = getResult(playerChoice, computerChoice);
-  
-      updateScore(result);
-      showResult(playerChoice, computerChoice, result);
-    });
+  button.addEventListener('click', () => {
+    const playerChoice = button.dataset.choice;
+    const computerChoice = getComputerChoice();
+    const result = getResult(playerChoice, computerChoice);
+
+    latestResult = result;
+    showResult(playerChoice, computerChoice, result);
   });
+});
 
 function getComputerChoice() {
   const randomIndex = Math.floor(Math.random() * choices.length);
@@ -46,13 +47,16 @@ function getResult(player, computer) {
 function updateScore(result) {
   if (result === 'win') score++;
   else if (result === 'lose') score--;
-
-  scoreDisplay.textContent = score;
 }
 
 function showResult(player, computer, result) {
   gameSection.classList.add('hidden');
   resultSection.classList.remove('hidden');
+
+  resultTextEl.textContent = '';
+  resultTextEl.classList.remove('result-message');
+  playAgainBtn.classList.remove('play-again-button');
+  playAgainBtn.style.display = 'none';
 
   setPickedIcon(userPickEl, player);
 
@@ -70,46 +74,52 @@ function showResult(player, computer, result) {
     if (winner) {
       winner.firstElementChild.classList.add('winner');
     }
+
+    updateScore(latestResult);
+    scoreDisplay.textContent = score;
+
+    resultTextEl.classList.add('result-message');
+    playAgainBtn.classList.add('play-again-button');
+    playAgainBtn.style.display = 'inline-block';
   }, 1000);
 }
-  
-  function setPickedIcon(container, choice) {
-    container.innerHTML = '';
-    if (!choice) return;
-  
-    const outer = document.createElement('div');
-    outer.className = `choice ${choice} static`;
-  
-    const inner = document.createElement('div');
-    inner.className = 'inner-circle';
-  
-    const img = document.createElement('img');
-    img.src = `./images/icon-${choice}.svg`;
-    img.alt = choice;
-  
-    inner.appendChild(img);
-    outer.appendChild(inner);
-    container.appendChild(outer);
-  }
-  
-  
-  function getResultText(result) {
-    if (result === 'win') return 'YOU WIN';
-    if (result === 'lose') return 'YOU LOSE';
-    return 'DRAW';
-  }
-  
-  playAgainBtn.addEventListener('click', () => {
-    resultSection.classList.add('hidden');
-    gameSection.classList.remove('hidden');
-  });
 
-  rulesButton.addEventListener('click', () => {
-    rulesModal.classList.remove('hidden');
-    rulesModal.style.display = 'flex';
-  });
-  
-  closeModalBtn.addEventListener('click', () => {
-    rulesModal.classList.add('hidden');
-    rulesModal.style.display = 'none';
-  });
+function setPickedIcon(container, choice) {
+  container.innerHTML = '';
+  if (!choice) return;
+
+  const outer = document.createElement('div');
+  outer.className = `choice ${choice} static`;
+
+  const inner = document.createElement('div');
+  inner.className = 'inner-circle';
+
+  const img = document.createElement('img');
+  img.src = `./images/icon-${choice}.svg`;
+  img.alt = choice;
+
+  inner.appendChild(img);
+  outer.appendChild(inner);
+  container.appendChild(outer);
+}
+
+function getResultText(result) {
+  if (result === 'win') return 'YOU WIN';
+  if (result === 'lose') return 'YOU LOSE';
+  return 'DRAW';
+}
+
+playAgainBtn.addEventListener('click', () => {
+  resultSection.classList.add('hidden');
+  gameSection.classList.remove('hidden');
+});
+
+rulesButton.addEventListener('click', () => {
+  rulesModal.classList.remove('hidden');
+  rulesModal.style.display = 'flex';
+});
+
+closeModalBtn.addEventListener('click', () => {
+  rulesModal.classList.add('hidden');
+  rulesModal.style.display = 'none';
+});
