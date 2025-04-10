@@ -112,8 +112,8 @@
   
   .choice {
     position: absolute;
-    width: 120px;
-    height: 120px;
+    width: 125px;
+    height: 125px;
     border-radius: 50%;
     border: none;
     background-color: white;
@@ -125,25 +125,22 @@
   }
   
   .choice.paper {
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    background-image: url('./images/icon-paper.svg');
-    background-image: linear-gradient(to bottom, var(--paper-gradient-start), var(--paper-gradient-end)), url('./images/icon-paper.svg');
+    top: -35px;
+    left: 0;
+    transform: translate(-30%, 0);
+    background-image: linear-gradient(to bottom, var(--paper-gradient-start), var(--paper-gradient-end));
   }
   
   .choice.scissors {
-    top: 0;
+    top: -35px;
     right: 0;
-    transform: translate(30%, 50%);
-    background-image: url('./images/icon-scissors.svg');
-    background-image: linear-gradient(to bottom, var(--scissors-gradient-start), var(--scissors-gradient-end)), url('./images/icon-scissors.svg');
+    transform: translate(30%, 0);
+    background-image: linear-gradient(to bottom, var(--scissors-gradient-start), var(--scissors-gradient-end));
   }
   
   .choice.rock {
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-    background-image: url('./images/icon-rock.svg');
-    background-image: linear-gradient(to bottom, var(--rock-gradient-start), var(--rock-gradient-end)), url('./images/icon-rock.svg');
+    background-image: linear-gradient(to bottom, var(--rock-gradient-start), var(--rock-gradient-end));
   }
