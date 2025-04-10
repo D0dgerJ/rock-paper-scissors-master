@@ -52,7 +52,7 @@ function showResult(player, computer, result) {
     resultSection.classList.remove('hidden');
   
     setPickedIcon(userPickEl, player);
-    setPickedIcon(computerPickEl, ''); // сначала пусто
+    setPickedIcon(computerPickEl, '');
   
     setTimeout(() => {
       setPickedIcon(computerPickEl, computer);
@@ -63,13 +63,18 @@ function showResult(player, computer, result) {
   function setPickedIcon(container, choice) {
     container.innerHTML = '';
     if (!choice) return;
-    const div = document.createElement('div');
-    div.className = `choice ${choice}`;
+  
+    const gradients = {
+      rock: 'linear-gradient(to bottom, var(--rock-gradient-start), var(--rock-gradient-end))',
+      paper: 'linear-gradient(to bottom, var(--paper-gradient-start), var(--paper-gradient-end))',
+      scissors: 'linear-gradient(to bottom, var(--scissors-gradient-start), var(--scissors-gradient-end))',
+    };
+  
+    container.style.background = gradients[choice];
     const img = document.createElement('img');
     img.src = `./images/icon-${choice}.svg`;
     img.alt = choice;
-    div.appendChild(img);
-    container.appendChild(div);
+    container.appendChild(img);
   }
   
   function getResultText(result) {
