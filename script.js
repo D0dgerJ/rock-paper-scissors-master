@@ -7,6 +7,9 @@ const userPickEl = document.getElementById('user-pick');
 const computerPickEl = document.getElementById('computer-pick');
 const resultTextEl = document.getElementById('result-text');
 const playAgainBtn = document.getElementById('play-again');
+const rulesButton = document.getElementById('rules-button');
+const rulesModal = document.getElementById('rules-modal');
+const closeModalBtn = document.getElementById('close-modal');
 
 let score = 0;
 
@@ -48,34 +51,47 @@ function updateScore(result) {
 }
 
 function showResult(player, computer, result) {
-    gameSection.classList.add('hidden');
-    resultSection.classList.remove('hidden');
-  
-    setPickedIcon(userPickEl, player);
-    setPickedIcon(computerPickEl, '');
-  
-    setTimeout(() => {
-      setPickedIcon(computerPickEl, computer);
-      resultTextEl.textContent = getResultText(result);
-    }, 1000);
-  }
+  gameSection.classList.add('hidden');
+  resultSection.classList.remove('hidden');
+
+  setPickedIcon(userPickEl, player);
+
+  computerPickEl.innerHTML = '';
+  const placeholder = document.createElement('div');
+  placeholder.className = 'placeholder';
+  computerPickEl.appendChild(placeholder);
+
+  setTimeout(() => {
+    computerPickEl.innerHTML = '';
+    setPickedIcon(computerPickEl, computer);
+    resultTextEl.textContent = getResultText(result);
+
+    const winner = result === 'win' ? userPickEl : result === 'lose' ? computerPickEl : null;
+    if (winner) {
+      winner.firstElementChild.classList.add('winner');
+    }
+  }, 1000);
+}
   
   function setPickedIcon(container, choice) {
     container.innerHTML = '';
     if (!choice) return;
   
-    const gradients = {
-      rock: 'linear-gradient(to bottom, var(--rock-gradient-start), var(--rock-gradient-end))',
-      paper: 'linear-gradient(to bottom, var(--paper-gradient-start), var(--paper-gradient-end))',
-      scissors: 'linear-gradient(to bottom, var(--scissors-gradient-start), var(--scissors-gradient-end))',
-    };
+    const outer = document.createElement('div');
+    outer.className = `choice ${choice} static`;
   
-    container.style.background = gradients[choice];
+    const inner = document.createElement('div');
+    inner.className = 'inner-circle';
+  
     const img = document.createElement('img');
     img.src = `./images/icon-${choice}.svg`;
     img.alt = choice;
-    container.appendChild(img);
+  
+    inner.appendChild(img);
+    outer.appendChild(inner);
+    container.appendChild(outer);
   }
+  
   
   function getResultText(result) {
     if (result === 'win') return 'YOU WIN';
@@ -86,4 +102,14 @@ function showResult(player, computer, result) {
   playAgainBtn.addEventListener('click', () => {
     resultSection.classList.add('hidden');
     gameSection.classList.remove('hidden');
+  });
+
+  rulesButton.addEventListener('click', () => {
+    rulesModal.classList.remove('hidden');
+    rulesModal.style.display = 'flex';
+  });
+  
+  closeModalBtn.addEventListener('click', () => {
+    rulesModal.classList.add('hidden');
+    rulesModal.style.display = 'none';
   });

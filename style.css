@@ -88,8 +88,39 @@
     color: var(--dark-text);
     padding: 2rem;
     border-radius: 16px;
-    max-width: 400px;
+    max-width: 450px;
     width: 100%;
+    text-align: center;
+    position: relative;
+  }
+  
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+  
+  .modal-header h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--dark-text);
+    flex: 1;
+    text-align: left;
+    margin: 0;
+  }
+  
+  #close-modal {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--header-outline);
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
   }
   
   .game {
@@ -112,15 +143,12 @@
   
   .choice {
     position: absolute;
-    width: 125px;
-    height: 125px;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
-    border: none;
-    background-color: white;
-    box-shadow: inset 0 6px rgba(0, 0, 0, 0.2);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
   }
   
@@ -129,6 +157,7 @@
     left: 0;
     transform: translate(-30%, 0);
     background-image: linear-gradient(to bottom, var(--paper-gradient-start), var(--paper-gradient-end));
+    box-shadow: 0 10px 0 0 hsl(230, 65%, 35%);
   }
   
   .choice.scissors {
@@ -136,6 +165,7 @@
     right: 0;
     transform: translate(30%, 0);
     background-image: linear-gradient(to bottom, var(--scissors-gradient-start), var(--scissors-gradient-end));
+    box-shadow: 0 10px 0 0 hsl(39, 84%, 35%);
   }
   
   .choice.rock {
@@ -143,6 +173,23 @@
     left: 50%;
     transform: translateX(-50%);
     background-image: linear-gradient(to bottom, var(--rock-gradient-start), var(--rock-gradient-end));
+    box-shadow: 0 10px 0 0 hsl(349, 70%, 35%);
+  }
+  
+  .choice .inner-circle {
+    width: 110px;
+    height: 110px;
+    background: white;
+    border-radius: 50%;
+    box-shadow: inset 0 6px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .choice img {
+    width: 40px;
+    height: 40px;
   }
 
   .result {
@@ -167,11 +214,9 @@
   }
   
   .picked-icon {
-    width: 125px;
-    height: 125px;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
-    background: white;
-    box-shadow: inset 0 6px rgba(0,0,0,0.2);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -180,6 +225,20 @@
   .picked-icon img {
     width: 40px;
     height: 40px;
+  }
+
+  .placeholder {
+    width: 110px;
+    height: 110px;
+    background: hsl(229, 25%, 20%);
+    border-radius: 50%;
+    opacity: 0.15;
+  }
+  
+  .choice.static {
+    position: static;
+    transform: none;
+    margin: 0 auto;
   }
   
   .outcome {

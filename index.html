@@ -24,13 +24,19 @@
       <div class="triangle-bg"></div>
   
       <button class="choice paper" data-choice="paper" aria-label="Paper">
-        <img src="./images/icon-paper.svg" alt="Paper">
+        <div class="inner-circle">
+          <img src="./images/icon-paper.svg" alt="Paper">
+        </div>
       </button>
       <button class="choice scissors" data-choice="scissors" aria-label="Scissors">
-        <img src="./images/icon-scissors.svg" alt="scissors">
+        <div class="inner-circle">
+          <img src="./images/icon-scissors.svg" alt="scissors">
+        </div>
       </button>
       <button class="choice rock" data-choice="rock" aria-label="Rock">
-        <img src="./images/icon-rock.svg" alt="rock">
+        <div class="inner-circle">
+          <img src="./images/icon-rock.svg" alt="rock">
+        </div>
       </button>
     </section>
 
@@ -52,17 +58,15 @@
     </section>
   </main>
 
-  <footer>
-    <button id="rules-button">Rules</button>
-  </footer>
+  <button id="rules-button" class="rules-button">RULES</button>
 
   <div id="rules-modal" class="modal hidden">
     <div class="modal-content">
       <div class="modal-header">
-        <h2>Rules</h2>
+        <h2>RULES</h2>
         <button id="close-modal">✕</button>
       </div>
-      <img src="./images/image-rules-bonus.svg" alt="Game Rules">
+      <img src="./images/image-rules.svg" alt="Game Rules">
     </div>
   </div>
 
